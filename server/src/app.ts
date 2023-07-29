@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import noteRouter from "./routes/notesRoute";
+import createHttpError , {isHttpError}from "http-errors";
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.use("/api/notes", noteRouter);
 
 // for all endpoints which not exists
 app.use((req, res, next) => {
-    next(Error("not found api"));
+    next(createHttpError(404, "Not Valid EndPoint"));    
 })
 
 //Error Handler
@@ -18,9 +19,15 @@ app.use((req, res, next) => {
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
     console.error(error);
     let errorMsg = "unknown error";
-    if (error instanceof Error)
+    let errorStatus = 500;
+
+    if (isHttpError(error))
+    {        
         errorMsg = error.message;
-    res.status(500).json({ error: errorMsg })
+        errorStatus = error.status;
+    }
+        
+    res.status(errorStatus).json({ error: errorMsg, httpStatus: errorStatus });
 })
 
 export default app;

@@ -9,4 +9,8 @@ noteRouter.get("/:NoteId", NoteController.getNoteById);
 
 noteRouter.post("/", NoteController.createNote);
 
+noteRouter.patch("/:NoteId", NoteController.updateNote);
+
+noteRouter.delete("/:NoteId", NoteController.deleteNote);
+
 export default noteRouter;
