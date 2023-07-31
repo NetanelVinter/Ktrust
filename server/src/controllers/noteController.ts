@@ -26,7 +26,7 @@ const noteByIdErrorCheck = async (noteId: string) => {
 };
 
 export const getNotes: RequestHandler = async (req, res, next) => {
-    try {
+    try {        
         const notes = await NoteModel.find().exec();
         res.status(200).json(notes);
     } catch (error) {
@@ -93,7 +93,7 @@ export const deleteNote: RequestHandler<NoteParam> = async (req,res,next) => {
     try {
         const note = await noteByIdErrorCheck(noteId);
         note.deleteOne();
-        res.status(204).send("remove successed");
+        res.sendStatus(204);
     } catch (error) {
         next(error);
     }

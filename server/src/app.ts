@@ -1,13 +1,30 @@
 import express, { NextFunction, Request, Response } from "express";
 import noteRouter from "./routes/notesRoute";
+import userRouter from "./routes/userRoute";
 import createHttpError , {isHttpError}from "http-errors";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import "dotenv/config";
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/api/notes", noteRouter);
+app.use(session({
+    secret: process.env.ACCESS_SECRET as string,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60,
+    },
+    rolling: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_CONNECTION_STRING
+    })
+}));
 
+app.use("/api/user", userRouter);
+app.use("/api/notes", noteRouter);
 
 // for all endpoints which not exists
 app.use((req, res, next) => {
