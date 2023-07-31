@@ -1,6 +1,5 @@
 import { Note } from "../models/note";
 
-
 interface ServerError {
     error: string,
     httpStatus: number
@@ -11,7 +10,7 @@ export interface NoteInput {
     text?: string
 }
 
-async function fetchData(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response> {
+export async function fetchData(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<Response> {
     const response = await fetch(input, init);
     if (response.ok)
         return response;

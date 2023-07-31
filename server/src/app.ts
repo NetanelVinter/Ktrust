@@ -5,6 +5,7 @@ import createHttpError , {isHttpError}from "http-errors";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import "dotenv/config";
+import { requiredAuth } from "./middleware/auth";
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(session({
 }));
 
 app.use("/api/user", userRouter);
-app.use("/api/notes", noteRouter);
+app.use("/api/notes",requiredAuth , noteRouter);
 
 // for all endpoints which not exists
 app.use((req, res, next) => {
