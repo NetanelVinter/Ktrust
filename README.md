@@ -4,7 +4,7 @@
 
 React Notes is a CRUD application for note-taking. With a sleek and intuitive design, users can create, read, update, and delete notes. The application ensures privacy by implementing user authentication; only the rightful user can view and manage their notes.
 
-![Login Window](./path_to_images/login window.png)
+![Login Window](./ReactNotesPictuers/login%20window.png)
 
 
 ## Installation
@@ -34,8 +34,8 @@ To use React Notes, follow these steps:
 2. Sign up or log in to your account.
 3. Once logged in, you can create, update, and delete notes. Your notes are private and will only be displayed when you are logged in.
 
-![Signup Window](./path_to_images/signup window.png)
-![Notes with User Logged In](./path_to_images/notes with user loggedin.png)
+![Signup Window](./ReactNotesPictuers/signup%20window.png)
+![Notes with User Logged In](./ReactNotesPictuers/notes%20with%20user%20loggedin.png)
 
 ## Technologies Used
 
